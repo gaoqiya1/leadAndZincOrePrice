@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .input-group { margin-bottom: 15px; }
+    input { padding: 8px; width: 100px; }
+    button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <h1>矿石报价计算器</h1>
+  <div class="input-group">
+    <label>锌含量(%):</label>
+    <input type="number" id="zn" step="0.01">
+  </div>
+  <div class="input-group">
+    <label>铝含量(%):</label>
+    <input type="number" id="al" step="0.01">
+  </div>
+  <div class="input-group">
+    <label>硅含量(%):</label>
+    <input type="number" id="si" step="0.01">
+  </div>
+  <button onclick="calculate()">立即报价</button>
+  <div id="result" style="margin-top: 20px; font-weight: bold;"></div>
+
+<script>
+async function calculate() {
+  const API_URL = 'https://script.google.com/macros/s/AKfycbwxdmShtnufCgUhD8Q15kxVDsXGQs-8R59aM19dD1y00DDHZXESeq60OE3ykleZvVPXBQ/exec'; // 替换为你的 Google Script URL
+  
+  const payload = {
+    zn: document.getElementById('zn').value,
+    al: document.getElementById('al').value,
+    si: document.getElementById('si').value
+  };
+
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+    document.getElementById('result').innerHTML = 
+      `最终报价：${await res.text()} USD`;
+  } catch (e) {
+    alert("计算失败，请检查输入");
+  }
+}
+</script>
+</body>
+</html>
