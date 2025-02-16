@@ -29,7 +29,7 @@
 
 <script>
 async function calculate() {
-  const API_URL = 'https://script.google.com/macros/s/AKfycbwEqb3jWtpHrHfgGXpLQBXqteJnkN1cU1u91oAceHbxOOg3hF_g8zhWkSK3IN6lLH91xg/exec'; // 替换为你的 Google Script URL
+  const API_URL = 'https://script.google.com/macros/s/AKfycbyT_SzxJvh5YWbrr3mWOhLaJfPKDbWZjfzS5GaBxuITWOtxMmoEmlwrAPXAptNQY3asQg/exec'; // 替换为你的 Google Script URL
   
   const payload = {
     zn: document.getElementById('zn').value,
@@ -44,6 +44,7 @@ async function calculate() {
     });
     document.getElementById('result').innerHTML = 
       `最终报价：${await res.text()} USD`; 
+      `矿石品位：${await res.text()}级`; 
   } catch (e) {
     alert("计算失败，请检查输入");
   }
